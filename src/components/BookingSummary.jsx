@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
 export default function BookingSummary({ currentUser }) {
   const [summary, setSummary] = useState([]);
 
   useEffect(() => {
     if (currentUser.role === "OWNER" || currentUser.role === "ADMIN") {
-      fetch("http://localhost:5000/api/bookings/summary", {
+      fetch(`${API_URL}/bookings/summary`, {
         headers: { "x-user-id": currentUser.id },
       })
         .then((res) => res.json())
